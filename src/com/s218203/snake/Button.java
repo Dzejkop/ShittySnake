@@ -1,12 +1,16 @@
 package com.s218203.snake;
 
 import java.awt.Color;
+import java.awt.Font;
 
 import acm.graphics.GLabel;
 import acm.graphics.GRect;
 
 public class Button {
 
+	public static final double BUTTON_WIDTH = 200;
+	public static final double BUTTON_HEIGHT = 50;
+	
 	double x = 0;
 	double y = 0;
 	
@@ -17,11 +21,12 @@ public class Button {
 	public Button(String label) {
 		text = new GLabel(label);
 		text.setColor(Color.BLACK);
+		text.setFont(Font.MONOSPACED);
 		
-		background = new GRect(200, 50);
+		background = new GRect(BUTTON_WIDTH, BUTTON_HEIGHT);
 		background.setFilled(true);
 		background.setColor(Color.GRAY);
-		highlight = new GRect(200, 50);
+		highlight = new GRect(BUTTON_WIDTH, BUTTON_HEIGHT);
 		highlight.setFilled(true);
 		highlight.setColor(new Color(0, 1, 0, 0.7f));
 		
@@ -39,7 +44,8 @@ public class Button {
 	public void setPos(double x, double y) {
 		background.setLocation(x, y);
 		highlight.setLocation(x, y);
-		text.setLocation(x + 20, y);
+		
+		text.setLocation(x + (BUTTON_WIDTH/2) - (text.getWidth()/2), y + (BUTTON_HEIGHT/2));
 		
 		this.x = x;
 		this.y = y;
@@ -51,6 +57,14 @@ public class Button {
 	
 	public double y() {
 		return y;
+	}
+	
+	public double getWidth() {
+		return BUTTON_WIDTH;
+	}
+	
+	public double getHeight() {
+		return BUTTON_HEIGHT;
 	}
 	
 	public void highlight() {

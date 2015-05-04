@@ -46,11 +46,11 @@ public class MainMenu {
 	
 	public void createButtons() {
 		Button b = Button.getPlayButton();
-		b.setPos(0, 20);
+		b.setPos(0, Main.RESY/4);
 		buttons.add(b);
 		
 		b = Button.getExitButton();
-		b.setPos(0, 300);
+		b.setPos(0, Main.RESY/4*3);
 		buttons.add(b);
 	}
 	
@@ -85,11 +85,11 @@ public class MainMenu {
 		for(Button b : buttons) {
 			if(state == MenuState.Active) {
 				b.setPos(
-						b.x() + ((0 - b.x()) * I_SP),
+						b.x() + (((Main.RESX/2 - (b.getWidth()/2)) - b.x()) * I_SP),
 						b.y());
 			} else {
 				b.setPos(
-						b.x() + ((-800 - b.x()) * I_SP),
+						b.x() + ((-810 - b.x()) * I_SP),
 						b.y());
 			}
 		}

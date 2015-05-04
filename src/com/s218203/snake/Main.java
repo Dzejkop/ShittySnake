@@ -55,6 +55,14 @@ public class Main extends GraphicsProgram {
 		}
 	}
 
+	void update() {
+		if(gameState == GameState.Gameplay) gameLoop();
+		menuLoop();
+		
+		pause(60 / 100000);
+	}
+	
+	// Primitive turn management
 	int sinceLastTurn = 0;
 	void gameLoop() {
 		
@@ -81,6 +89,17 @@ public class Main extends GraphicsProgram {
 	boolean isRunning() {
 		return true;
 	}
+	
+	void switchMode(GameState newState) {
+		if(newState == GameState.Gameplay && gameState == GameState.Menu) {
+			menu.setActive(false);
+		}
+		else if(newState == GameState.Menu && gameState == GameState.Gameplay) {
+			menu.setActive(true);
+		}
+		
+		gameState = newState;
+	}
 
 	void initialize() {
 		addKeyListeners();
@@ -101,13 +120,6 @@ public class Main extends GraphicsProgram {
 		// Create the menu
 		menu = new MainMenu();
 		menu.createButtons();
-	}
-
-	void update() {
-		if(gameState == GameState.Gameplay) gameLoop();
-		menuLoop();
-		
-		pause(60 / 100000);
 	}
 
 	void spawnFood() {
@@ -139,16 +151,13 @@ public class Main extends GraphicsProgram {
 
 		// Check for collisions with tail
 		if (snake.checkSelfCollisions() == true) {
-			gameState = GameState.Menu;
-			menu.setActive(true);
+			switchMode(GameState.Menu);
 		}
 	}
 
 	// Input management
 	@Override
 	public void keyPressed(KeyEvent e) {
-		super.keyPressed(e);
-
 		if (gameState == GameState.Gameplay) {
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
 				snake.setDirection(0, -1);
@@ -160,8 +169,6 @@ public class Main extends GraphicsProgram {
 				snake.setDirection(1, 0);
 			} else if (e.getKeyChar() == KeyEvent.VK_G) {
 				snake.grow();
-			} else {
-				println("Piss off wanker!");
 			}
 		} else if (gameState == GameState.Menu) {
 			if(e.getKeyCode() == KeyEvent.VK_UP) {
@@ -176,23 +183,11 @@ public class Main extends GraphicsProgram {
 		}
 	}
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		super.keyTyped(e);
-	}
-
 	public void quitGame() {
 		this.exit();
 	}
 
 	public void startGame() {
-		menu.setActive(false);
-		
-		gameState = GameState.Gameplay;
+		switchMode(GameState.Gameplay);
 	}
 }

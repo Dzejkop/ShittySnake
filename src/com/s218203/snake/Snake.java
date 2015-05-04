@@ -64,6 +64,8 @@ public class Snake {
 	}
 	
 	public void setDirection(int x, int y) {
+		if((x * directionX) + (y * directionY) != 0) return;
+		
 		directionX = x;
 		directionY = y;
 	}
@@ -71,6 +73,9 @@ public class Snake {
 	public boolean checkSelfCollisions() {
 		
 		SnakeSegment head = body.get(0);
+		
+		// Impossible to self collide
+		if(body.size() < 3) return false;
 		
 		for(SnakeSegment s : body) {
 			if(s != head && head.x == s.x && head.y == s.y) return true;
