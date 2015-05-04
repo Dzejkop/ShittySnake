@@ -26,7 +26,7 @@ public class SnakeSegment implements Renderable {
 		dormantColor = Color.GRAY;
 		spikedColor = Color.GREEN;
 		
-		rect = new GRect(20, 20);
+		rect = new GRect(Main.TILE_SIZE, Main.TILE_SIZE);
 		rect.setColor(dormantColor);
 		rect.setFilled(true);
 	}
@@ -40,7 +40,7 @@ public class SnakeSegment implements Renderable {
 		this.dormantColor = dormantColor;
 		this.spikedColor = spikedColor;
 		
-		rect = new GRect(20, 20);
+		rect = new GRect(Main.TILE_SIZE, Main.TILE_SIZE);
 		rect.setColor(dormantColor);
 		rect.setFilled(true);
 	}
@@ -103,6 +103,6 @@ public class SnakeSegment implements Renderable {
 		y = newY;
 		
 		// Update the GObject
-		rect.setLocation(x*20,  y*20);
+		rect.setLocation(x*Main.TILE_SIZE,  y*Main.TILE_SIZE);
 	}
 }

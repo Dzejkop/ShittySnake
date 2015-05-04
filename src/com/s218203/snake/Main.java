@@ -18,6 +18,7 @@ public class Main extends GraphicsProgram {
 	// Values
 	public static final int RESX = 800;
 	public static final int RESY = 600;
+	public static final int TILE_SIZE = 40;
 	
 	// Lists
 	List<Food> foods;

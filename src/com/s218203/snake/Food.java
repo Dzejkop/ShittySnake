@@ -15,11 +15,11 @@ public class Food implements Renderable {
 		this.x = x;
 		this.y = y;
 		
-		rect = new GRect(20, 20);
+		rect = new GRect(Main.TILE_SIZE, Main.TILE_SIZE);
 		
 		create(Main.instance());
 		
-		rect.setLocation(x * 20, y * 20);
+		rect.setLocation(x * Main.TILE_SIZE, y * Main.TILE_SIZE);
 		rect.setFilled(true);
 		rect.setColor(Color.BLUE);
 	}
