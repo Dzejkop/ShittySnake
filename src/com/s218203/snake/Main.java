@@ -25,6 +25,10 @@ public class Main extends GraphicsProgram {
 
 	// Snake
 	Snake snake;
+	
+	// Score displayer
+	ScoreDisplay scoreDisplay;
+	int score = 0;
 
 	// Singleton instance
 	private static Main instance;
@@ -117,6 +121,8 @@ public class Main extends GraphicsProgram {
 		// Set background color
 		setBackground(Color.BLACK);
 		
+		scoreDisplay = new ScoreDisplay();
+		
 		// Create the menu
 		menu = new MainMenu();
 		menu.createButtons();
@@ -141,6 +147,8 @@ public class Main extends GraphicsProgram {
 			if (f.x == head.x && f.y == head.y) {
 				snake.eat();
 				foodsToRemove.add(f);
+				score++;
+				scoreDisplay.setScore(score);
 			}
 		}
 

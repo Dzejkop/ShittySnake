@@ -22,6 +22,7 @@ public class Button {
 		text = new GLabel(label);
 		text.setColor(Color.BLACK);
 		text.setFont(Font.MONOSPACED);
+		text.setFont(text.getFont().deriveFont(24.0f));
 		
 		background = new GRect(BUTTON_WIDTH, BUTTON_HEIGHT);
 		background.setFilled(true);
@@ -45,7 +46,7 @@ public class Button {
 		background.setLocation(x, y);
 		highlight.setLocation(x, y);
 		
-		text.setLocation(x + (BUTTON_WIDTH/2) - (text.getWidth()/2), y + (BUTTON_HEIGHT/2));
+		text.setLocation(x + (BUTTON_WIDTH/2) - (text.getWidth()/2), y + (BUTTON_HEIGHT/2) + (text.getHeight()/4));
 		
 		this.x = x;
 		this.y = y;
