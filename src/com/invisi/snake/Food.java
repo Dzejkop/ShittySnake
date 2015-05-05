@@ -21,7 +21,7 @@ public class Food implements Renderable {
 		
 		rect.setLocation(x * Main.TILE_SIZE, y * Main.TILE_SIZE);
 		rect.setFilled(true);
-		rect.setColor(Color.BLUE);
+		rect.setColor(Color.GREEN);
 	}
 
 	@Override

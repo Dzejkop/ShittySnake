@@ -145,7 +145,7 @@ public class Main extends GraphicsProgram {
 	}
 	
 	public void quitGame() {
-		this.exit();
+		System.exit(0);
 	}
 
 	public void startGame() {
@@ -201,6 +201,7 @@ public class Main extends GraphicsProgram {
 		// Create the menu
 		menu = new MainMenu();
 		menu.createButtons();
+		scoreDisplay.bringToFront();
 	}
 
 	void spawnFood() {

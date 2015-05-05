@@ -62,6 +62,9 @@ public class MainMenu {
 		b = Button.getExitButton();
 		b.setPos(0, Main.RESY / 8 * 5);
 		buttons.add(b);
+		
+		// Play button is active by default
+		buttons.get(0).highlight();
 	}
 
 	public void setActive(boolean state) {
