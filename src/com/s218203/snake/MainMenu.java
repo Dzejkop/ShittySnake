@@ -8,7 +8,7 @@ import acm.graphics.GRect;
 
 public class MainMenu {
 
-	public static final float I_SP = 0.001f;
+	public static final float I_SP = 0.1f;
 	
 	// Buttons in the current context
 	List<Button> activeButtons;
@@ -34,7 +34,7 @@ public class MainMenu {
 		activeButtons = new ArrayList<>();
 		
 		backgroundPanel = new GRect(0, 0, Main.RESX, Main.RESY);
-		backgroundPanel.setColor(new Color(1, 0, 0, 0.7f));
+		backgroundPanel.setColor(new Color(1, 0, 0, 0.9f));
 		backgroundPanel.setFilled(true);
 		
 		Main.instance().add(backgroundPanel);
@@ -58,7 +58,7 @@ public class MainMenu {
 		if(state) {
 			this.state = MenuState.Active;
 			
-			backgroundPanel.sendForward();
+			backgroundPanel.sendToFront();
 			
 			for(Button b : buttons) {
 				b.sendToFront();

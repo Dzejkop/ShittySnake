@@ -21,7 +21,7 @@ public class Main extends GraphicsProgram {
 	public static final int TILE_SIZE = 40;
 	
 	// Framerate management
-	public static final int FPS = 30;
+	public static final int FPS = 60;
     public static final int SKIP_TICKS = 1000 / FPS;
     int nextGameTick;
     int sleepTime = 0;
@@ -87,7 +87,7 @@ public class Main extends GraphicsProgram {
 	
 	// Primitive turn management
 	int sinceLastTurn = 0;
-	int framesPerTurn = 4000;
+	int framesPerTurn = 7;
 	void gameLoop() {
 		
 		sinceLastTurn++;
@@ -107,7 +107,7 @@ public class Main extends GraphicsProgram {
 	}
 	
 	int getTickCount() {
-		return (int) (System.nanoTime() / 1000);
+		return (int) (System.nanoTime() / 1000000);
 	}
 
 	void menuLoop() {

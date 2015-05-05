@@ -54,6 +54,10 @@ public class Snake {
 	public void eat() {
 		grow();
 		
+		spike();
+	}
+	
+	public void spike() {
 		for(SnakeSegment s : body) {
 			s.spike(1);
 		}
@@ -83,7 +87,10 @@ public class Snake {
 		if(body.size() < 3) return false;
 		
 		for(SnakeSegment s : body) {
-			if(s != head && head.x == s.x && head.y == s.y) return true;
+			if(s != head && head.x == s.x && head.y == s.y) {
+				spike();
+				return true;
+			}
 		}
 		
 		return false;
