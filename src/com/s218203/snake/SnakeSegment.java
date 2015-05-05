@@ -13,6 +13,7 @@ public class SnakeSegment implements Renderable {
 	int lastX, lastY;
 	
 	float energy = 0; // <0, 1>
+	float energyDecay = 0.8f;
 	
 	Color dormantColor;
 	Color spikedColor;
@@ -23,8 +24,8 @@ public class SnakeSegment implements Renderable {
 		lastX = x;
 		lastY = y;
 		
-		dormantColor = Color.GRAY;
-		spikedColor = Color.GREEN;
+		dormantColor = new Color(1, 1, 1, 0.0f);
+		spikedColor = new Color(1, 1, 1, 1);
 		
 		rect = new GRect(Main.TILE_SIZE, Main.TILE_SIZE);
 		rect.setColor(dormantColor);
@@ -57,33 +58,42 @@ public class SnakeSegment implements Renderable {
 	
 	public void update() {
 		
-		
+		// Red
 		float dRed = (float)(dormantColor.getRed() / 255.0f);
 		float sRed = (float)(spikedColor.getRed() / 255.0f);
 		
 		float Red = (1-energy)*dRed + (energy*sRed);
 		if(Red > 1) Red = 1;
 		
-		
+		// Blue
 		float dBlue = (float)(dormantColor.getBlue() / 255.0f);
 		float sBlue = (float)(spikedColor.getBlue() / 255.0f);
 		
 		float Blue = (1-energy)*dBlue + (energy*sBlue);
 		if(Blue > 1) Blue = 1;
 		
-		
+		// Green
 		float dGreen = (float)(dormantColor.getGreen() / 255.0f);
 		float sGreen = (float)(spikedColor.getGreen() / 255.0f);
 		
 		float Green = (1-energy)*dGreen + (energy*sGreen);
 		if(Green > 1) Green = 1;
 		
+		// Alpha
+		float dAlpha = (float)(dormantColor.getAlpha() / 255.0f);
+		float sAlpha = (float)(spikedColor.getAlpha() / 255.0f);
+		
+		float Alpha = (1-energy)*dAlpha + (energy*sAlpha);
+		if(Alpha > 1) Alpha = 1;
+		
+		
+		
 		// Actual color
-		Color n = new Color(Red, Green, Blue);
+		Color n = new Color(Red, Green, Blue, Alpha);
 		rect.setColor(n);
 		
 		// Energy decay
-		energy *= 0.9f;
+		energy *= energyDecay;
 	}
 	
 	public void spike(float val) {

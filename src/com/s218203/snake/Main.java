@@ -20,6 +20,17 @@ public class Main extends GraphicsProgram {
 	public static final int RESY = 600;
 	public static final int TILE_SIZE = 40;
 	
+	// Framerate management
+	public static final int FPS = 30;
+    public static final int SKIP_TICKS = 1000 / FPS;
+    int nextGameTick;
+    int sleepTime = 0;
+	
+	int boardWidth;
+	int boardHeight;
+	int snakeStartingX;
+	int snakeStartingY;
+	
 	// Lists
 	List<Food> foods;
 	List<Wall> walls;
@@ -54,6 +65,8 @@ public class Main extends GraphicsProgram {
 		
 		initialize();
 
+		nextGameTick = getTickCount();
+		
 		// Main game loop
 		while (isRunning()) {
 			update();
@@ -64,15 +77,21 @@ public class Main extends GraphicsProgram {
 		if(gameState == GameState.Gameplay) gameLoop();
 		menuLoop();
 		
-		pause(60 / 100000);
+		nextGameTick += SKIP_TICKS;
+		sleepTime = nextGameTick - getTickCount();
+		if(sleepTime >= 0) {
+			pause(sleepTime);
+		} else {
+		}
 	}
 	
 	// Primitive turn management
 	int sinceLastTurn = 0;
+	int framesPerTurn = 4000;
 	void gameLoop() {
 		
 		sinceLastTurn++;
-		if(sinceLastTurn < 100000) return;
+		if(sinceLastTurn < framesPerTurn) return;
 		else {
 			sinceLastTurn = 0;
 		}
@@ -85,6 +104,10 @@ public class Main extends GraphicsProgram {
 		}
 
 		detectCollisions();
+	}
+	
+	int getTickCount() {
+		return (int) (System.nanoTime() / 1000);
 	}
 
 	void menuLoop() {
@@ -105,19 +128,54 @@ public class Main extends GraphicsProgram {
 		
 		gameState = newState;
 	}
+	
+	void resetGame() {
+		snake.reset(snakeStartingX, snakeStartingY);
+		score = 0;
+		scoreDisplay.resetScore();
+	}
+	
+	public void quitGame() {
+		this.exit();
+	}
 
+	public void startGame() {
+		switchMode(GameState.Gameplay);
+		resetGame();
+	}
+
+	// Initialize all the objects, lists and values
 	void initialize() {
 		addKeyListeners();
 
 		// Set resolution
 		this.setSize(RESX, RESY);
 		
+		// Determine board size
+		boardWidth = RESX/TILE_SIZE;
+		boardHeight = RESY/TILE_SIZE;
+		
+		snakeStartingX = boardWidth/2;
+		snakeStartingY = boardHeight/2;
+		
 		// Initialize lists
 		foods = new ArrayList<Food>();
 		walls = new ArrayList<Wall>();
-
+		
+		// Generate walls
+		// Generate top and bottom
+		for(int x = 0; x < boardWidth; x++) {
+			walls.add(new Wall(x, 0));
+			walls.add(new Wall(x, boardHeight-1));
+		}
+		// Genrate sides
+		for(int y = 1; y < boardHeight-1; y++) {
+			walls.add(new Wall(0, y));
+			walls.add(new Wall(boardWidth-1, y));
+		}
+		
 		// Initialize snake
-		snake = new Snake();
+		snake = new Snake(snakeStartingX, snakeStartingY);
 
 		// Set background color
 		setBackground(Color.BLACK);
@@ -132,8 +190,8 @@ public class Main extends GraphicsProgram {
 	void spawnFood() {
 		Random r = new Random();
 
-		int x = 1 + r.nextInt(20);
-		int y = 1 + r.nextInt(20);
+		int x = 1 + r.nextInt(boardWidth-2);
+		int y = 1 + r.nextInt(boardHeight-2);
 
 		foods.add(new Food(x, y));
 	}
@@ -153,15 +211,27 @@ public class Main extends GraphicsProgram {
 			}
 		}
 
+		// Remove foods if necessary
 		for (Food f : foodsToRemove) {
 			f.destroy(this);
 			foods.remove(f);
 		}
+		
+		// Chech for collisions with walls
+		for(Wall w : walls) {
+			if(w.x == head.x && w.y == head.y) {
+				gameOver();
+			}
+		}
 
 		// Check for collisions with tail
 		if (snake.checkSelfCollisions() == true) {
-			switchMode(GameState.Menu);
+			gameOver();
 		}
+	}
+
+	private void gameOver() {
+		switchMode(GameState.Menu);
 	}
 
 	// Input management
@@ -190,13 +260,5 @@ public class Main extends GraphicsProgram {
 				menu.confirm();
 			}
 		}
-	}
-
-	public void quitGame() {
-		this.exit();
-	}
-
-	public void startGame() {
-		switchMode(GameState.Gameplay);
 	}
 }

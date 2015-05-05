@@ -8,7 +8,7 @@ import acm.graphics.GRect;
 
 public class MainMenu {
 
-	public static final float I_SP = 0.00001f;
+	public static final float I_SP = 0.001f;
 	
 	// Buttons in the current context
 	List<Button> activeButtons;

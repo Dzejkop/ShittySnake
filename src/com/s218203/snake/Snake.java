@@ -12,11 +12,16 @@ public class Snake {
 	// The first segment is a head
 	List<SnakeSegment> body;
 	
-	public Snake() {
+	Color headDormantColor = Color.GREEN;
+	Color headSpikedColor = Color.WHITE;
+	Color bodyDormantColor = new Color(1, 1, 1, 0);
+	Color bodySpikedColor = Color.WHITE;
+	
+	public Snake(int startX, int startY) {
 		body = new LinkedList<SnakeSegment>();
 		
 		// Add the head
-		body.add(new SnakeSegment(0,0, Color.GRAY, Color.WHITE));
+		body.add(new SnakeSegment(startX, startY, headDormantColor, headSpikedColor));
 		body.get(0).create(Main.instance());
 	}
 	
@@ -39,7 +44,7 @@ public class Snake {
 	public void grow() {
 		SnakeSegment last = body.get(body.size()-1);
 		
-		SnakeSegment n = new SnakeSegment(last.x, last.y, Color.GRAY, Color.GREEN);
+		SnakeSegment n = new SnakeSegment(last.x, last.y, bodyDormantColor, bodySpikedColor);
 		
 		n.create(Main.instance());
 		
@@ -82,6 +87,21 @@ public class Snake {
 		}
 		
 		return false;
+	}
+
+	public void reset(int startX, int startY) {
+		for(SnakeSegment s : body) {
+			s.destroy(Main.instance());
+		}
+		
+		body.clear();
+		
+		// Add the head
+		body.add(new SnakeSegment(startX, startY, headDormantColor, headSpikedColor));
+		body.get(0).create(Main.instance());
+		
+		directionX = 0;
+		directionY = 0;
 	}
 	
 	
