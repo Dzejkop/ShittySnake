@@ -13,8 +13,7 @@ public class ScoreDisplay {
 		
 		scoreDisplay = new GLabel("Score: ");
 		
-		scoreDisplay.setFont(Font.SANS_SERIF);
-		scoreDisplay.setFont(scoreDisplay.getFont().deriveFont(120.0f));
+		scoreDisplay.setFont(Main.instance().bulkyFont.deriveFont(100.0f));
 		scoreDisplay.setColor(Color.WHITE);
 		
 		scoreDisplay.setLocation(Main.RESX/2 - (scoreDisplay.getWidth()/2), Main.RESY - Main.TILE_SIZE);
@@ -35,6 +34,10 @@ public class ScoreDisplay {
 
 	public void bringToFront() {
 		scoreDisplay.sendToFront();
+	}
+	
+	public void bringToBack() {
+		scoreDisplay.sendToBack();
 	}
 	
 }

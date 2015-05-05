@@ -1,12 +1,16 @@
 package com.s218203.snake;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import acm.program.GraphicsProgram;
+import acmx.export.java.io.FileInputStream;
 
 public class Main extends GraphicsProgram {
 
@@ -30,6 +34,9 @@ public class Main extends GraphicsProgram {
 	int boardHeight;
 	int snakeStartingX;
 	int snakeStartingY;
+	
+	// Font for the game
+	Font bulkyFont;
 	
 	// Lists
 	List<Food> foods;
@@ -121,6 +128,7 @@ public class Main extends GraphicsProgram {
 	void switchMode(GameState newState) {
 		if(newState == GameState.Gameplay && gameState == GameState.Menu) {
 			menu.setActive(false);
+			scoreDisplay.bringToBack();
 		}
 		else if(newState == GameState.Menu && gameState == GameState.Gameplay) {
 			menu.setActive(true);
@@ -158,6 +166,13 @@ public class Main extends GraphicsProgram {
 		
 		snakeStartingX = boardWidth/2;
 		snakeStartingY = boardHeight/2;
+		
+		// Create the font
+		try {
+			bulkyFont = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("BULKYPIX.TTF"));
+		} catch (FontFormatException | IOException e) {
+
+		}		
 		
 		// Initialize lists
 		foods = new ArrayList<Food>();

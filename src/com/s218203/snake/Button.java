@@ -21,15 +21,14 @@ public class Button {
 	public Button(String label) {
 		text = new GLabel(label);
 		text.setColor(Color.BLACK);
-		text.setFont(Font.MONOSPACED);
-		text.setFont(text.getFont().deriveFont(24.0f));
+		text.setFont(Main.instance().bulkyFont.deriveFont(24.0f));
 		
 		background = new GRect(BUTTON_WIDTH, BUTTON_HEIGHT);
 		background.setFilled(true);
-		background.setColor(Color.GRAY);
+		background.setColor(Color.WHITE);
 		highlight = new GRect(BUTTON_WIDTH, BUTTON_HEIGHT);
 		highlight.setFilled(true);
-		highlight.setColor(new Color(0, 1, 0, 0.7f));
+		highlight.setColor(new Color(1, 0, 0, 0.7f));
 		
 		unHighlight();
 		
