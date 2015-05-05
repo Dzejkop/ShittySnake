@@ -1,7 +1,6 @@
 package com.s218203.snake;
 
 import java.awt.Color;
-import java.awt.Font;
 
 import acm.graphics.GLabel;
 import acm.graphics.GRect;

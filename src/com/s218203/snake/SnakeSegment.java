@@ -13,7 +13,7 @@ public class SnakeSegment implements Renderable {
 	int lastX, lastY;
 	
 	float energy = 0; // <0, 1>
-	float energyDecay = 0.7f;
+	float energyDecay = 0.5f;
 	
 	Color dormantColor;
 	Color spikedColor;
