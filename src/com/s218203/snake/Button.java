@@ -121,7 +121,7 @@ public class Button {
 
 	public void sendToFront() {
 		background.sendToFront();
-		text.sendToFront();
 		highlight.sendToFront();
+		text.sendToFront();
 	}
 }

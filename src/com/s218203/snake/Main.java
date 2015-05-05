@@ -124,6 +124,7 @@ public class Main extends GraphicsProgram {
 		}
 		else if(newState == GameState.Menu && gameState == GameState.Gameplay) {
 			menu.setActive(true);
+			scoreDisplay.bringToFront();
 		}
 		
 		gameState = newState;

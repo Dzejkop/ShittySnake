@@ -19,6 +19,7 @@ public class MainMenu {
 	// Background panel
 	GRect backgroundPanel;
 	
+	
 	// Which of the active buttons is in focus
 	int buttonInFocus = 0;
 	
@@ -34,7 +35,7 @@ public class MainMenu {
 		activeButtons = new ArrayList<>();
 		
 		backgroundPanel = new GRect(0, 0, Main.RESX, Main.RESY);
-		backgroundPanel.setColor(new Color(1, 0, 0, 0.9f));
+		backgroundPanel.setColor(new Color(0, 0, 0, 0.9f));
 		backgroundPanel.setFilled(true);
 		
 		Main.instance().add(backgroundPanel);
@@ -46,11 +47,11 @@ public class MainMenu {
 	
 	public void createButtons() {
 		Button b = Button.getPlayButton();
-		b.setPos(0, Main.RESY/4);
+		b.setPos(0, Main.RESY/4*1);
 		buttons.add(b);
 		
 		b = Button.getExitButton();
-		b.setPos(0, Main.RESY/4*3);
+		b.setPos(0, Main.RESY/4*2);
 		buttons.add(b);
 	}
 	

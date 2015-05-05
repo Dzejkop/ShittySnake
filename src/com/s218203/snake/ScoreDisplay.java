@@ -15,7 +15,7 @@ public class ScoreDisplay {
 		
 		scoreDisplay.setFont(Font.SANS_SERIF);
 		scoreDisplay.setFont(scoreDisplay.getFont().deriveFont(120.0f));
-		scoreDisplay.setColor(new Color(1,1,1,0.5f));
+		scoreDisplay.setColor(Color.WHITE);
 		
 		scoreDisplay.setLocation(Main.RESX/2 - (scoreDisplay.getWidth()/2), Main.RESY - Main.TILE_SIZE);
 		
@@ -31,6 +31,10 @@ public class ScoreDisplay {
 	public void resetScore() {
 		scoreDisplay.setLabel("Score: " + "0");
 		scoreDisplay.setLocation(Main.RESX/2 - (scoreDisplay.getWidth()/2), Main.RESY - Main.TILE_SIZE);
+	}
+
+	public void bringToFront() {
+		scoreDisplay.sendToFront();
 	}
 	
 }

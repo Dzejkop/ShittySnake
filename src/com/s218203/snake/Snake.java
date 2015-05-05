@@ -12,7 +12,7 @@ public class Snake {
 	// The first segment is a head
 	List<SnakeSegment> body;
 	
-	Color headDormantColor = Color.GREEN;
+	Color headDormantColor = Color.GRAY;
 	Color headSpikedColor = Color.WHITE;
 	Color bodyDormantColor = new Color(1, 1, 1, 0);
 	Color bodySpikedColor = Color.WHITE;
