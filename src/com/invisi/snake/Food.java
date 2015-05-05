@@ -1,17 +1,17 @@
-package com.s218203.snake;
+package com.invisi.snake;
 
 import java.awt.Color;
 
 import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
 
-public class Wall implements Renderable{
+public class Food implements Renderable {
 	int x;
 	int y;
 	
 	GRect rect;
 	
-	public Wall(int x, int y) {
+	public Food(int x, int y) {
 		this.x = x;
 		this.y = y;
 		
@@ -21,7 +21,7 @@ public class Wall implements Renderable{
 		
 		rect.setLocation(x * Main.TILE_SIZE, y * Main.TILE_SIZE);
 		rect.setFilled(true);
-		rect.setColor(Color.RED);
+		rect.setColor(Color.BLUE);
 	}
 
 	@Override

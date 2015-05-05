@@ -1,4 +1,4 @@
-package com.s218203.snake;
+package com.invisi.snake;
 
 import java.awt.Color;
 import java.util.ArrayList;
