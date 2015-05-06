@@ -6,8 +6,13 @@ import java.util.List;
 
 public class Snake {
 	
+	// Direction of the head
 	int directionX = 0;
 	int directionY = 0;
+	
+	// Buffer values to avoid the snake turning into itself
+	int newDirectionX = 0;
+	int newDirectionY = 0;
 	
 	// The first segment is a head
 	List<SnakeSegment> body;
@@ -66,6 +71,9 @@ public class Snake {
 	void moveHead() {
 		SnakeSegment head = body.get(0);
 		
+		directionX = newDirectionX;
+		directionY = newDirectionY;
+		
 		int nx = head.x + directionX;
 		int ny = head.y + directionY;
 		
@@ -75,8 +83,8 @@ public class Snake {
 	public void setDirection(int x, int y) {
 		if((x * directionX) + (y * directionY) != 0) return;
 		
-		directionX = x;
-		directionY = y;
+		newDirectionX = x;
+		newDirectionY = y;
 	}
 
 	public boolean checkSelfCollisions() {
@@ -109,6 +117,9 @@ public class Snake {
 		
 		directionX = 0;
 		directionY = 0;
+		
+		newDirectionX = 0;
+		newDirectionY = 0;
 	}
 	
 	
