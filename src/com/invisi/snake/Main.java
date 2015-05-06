@@ -55,12 +55,13 @@ public class Main extends GraphicsProgram {
 	// Main menu
 	MainMenu menu;
 
-	// Game state stuff
+	// Game state vars
 	enum GameState {
 		Gameplay, Menu
 	}
 	GameState gameState = GameState.Menu;
-
+	boolean isRunning = true;
+	
 	public static Main instance() {
 		return instance;
 	}
@@ -75,7 +76,7 @@ public class Main extends GraphicsProgram {
 		nextGameTick = getTickCount();
 		
 		// Main game loop
-		while (isRunning()) {
+		while (isRunning) {
 			update();
 		}
 	}
@@ -94,7 +95,7 @@ public class Main extends GraphicsProgram {
 	
 	// Primitive turn management
 	int sinceLastTurn = 0;
-	int framesPerTurn = 7;
+	int framesPerTurn = 8;
 	void gameLoop() {
 		
 		sinceLastTurn++;
@@ -119,10 +120,6 @@ public class Main extends GraphicsProgram {
 
 	void menuLoop() {
 		menu.update();
-	}
-
-	boolean isRunning() {
-		return true;
 	}
 	
 	void switchMode(GameState newState) {
